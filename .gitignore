@@ -1,0 +1,37 @@
+# 编译生成的文件
+*.o
+*.out
+*.obj
+*.exe
+*.elf
+*.bin
+*.map
+
+# 日志文件
+*.log
+
+# 临时文件
+*~
+*.swp
+*.tmp
+
+# VS Code 配置
+.vscode/
+
+# ctags
+tags
+
+# 依赖库
+*.a
+*.so
+*.dll
+
+# MacOS
+.DS_Store
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 其他
+*.bak
