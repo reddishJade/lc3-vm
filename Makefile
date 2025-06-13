@@ -1,20 +1,31 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
-TARGET = lc3vm
-ASM = python3 assembler.py
+CFLAGS = -Wall -Wextra -std=c99 -Iinclude
+TARGET = bin/lc3vm
+SRC = src/lc3.c
+OBJ = build/lc3.o
+ASM = python3 assembler/assembler.py
 
-all: $(TARGET)
+all: bin build $(TARGET)
 
-$(TARGET): lc3.c
-	$(CC) $(CFLAGS) -o $@ $<
+bin:
+	@mkdir -p bin
 
-hello.obj: hello.asm
+build:
+	@mkdir -p build
+
+build/lc3.o: src/lc3.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+test/hello.obj: test/hello.asm
 	$(ASM) $< $@
 
-run: $(TARGET) hello.obj
-	./$(TARGET) hello.obj
+run: $(TARGET) test/hello.obj
+	./$(TARGET) test/hello.obj
 
 clean:
-	rm -f $(TARGET) *.o *.obj
+	rm -rf build/*.o bin/lc3vm test/*.obj
 
-.PHONY: all clean run
+.PHONY: all clean run bin build
