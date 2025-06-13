@@ -1,45 +1,86 @@
-# lc3-vm
+# LC-3 Virtual Machine
 
-LC-3 虚拟机项目。
+A complete implementation of the LC-3 (Little Computer 3) virtual machine in C. This project includes both the VM and an assembler for converting LC-3 assembly code into executable object files.
 
-## 目录结构
+## Features
+
+- Full implementation of the LC-3 instruction set
+- Memory-mapped I/O for keyboard input and display output
+- Support for all LC-3 trap routines (GETC, OUT, PUTS, IN, PUTSP, HALT)
+- Built-in assembler for compiling LC-3 assembly code
+- Simple and clean codebase with clear separation of concerns
+
+## Project Structure
 
 ```
 lc3-vm/
-├── assembler/         # 汇编器相关代码
-│   └── assembler.py
-├── bin/               # 可执行文件输出目录
-│   └── lc3vm
-├── build/             # 编译中间文件
-├── include/           # 头文件
-├── src/               # 源代码
-│   ├── main.c
-│   └── lc3.c
-├── test/              # 测试代码/样例
-│   ├── hello.asm
-│   ├── hello.s
-│   └── hello.obj
-├── Makefile           # 构建脚本
-├── README.md          # 项目说明
-├── LICENSE            # 许可证
-└── lc3-vm.md          # 其他文档
+├── assembler/         # LC-3 Assembler implementation
+│   ├── assembler.py   # Python-based assembler script
+│   └── README.md      # Assembler documentation
+├── bin/               # Compiled binaries
+│   └── lc3vm          # Main VM executable
+├── build/             # Build artifacts
+├── include/           # Header files
+│   └── lc3.h          # LC-3 VM header
+├── src/               # Source code
+│   ├── lc3.c          # Main VM implementation
+│   └── main.c         # Entry point
+├── test/              # Test programs
+│   ├── hello.asm      # Example assembly
+│   ├── hello.s        # Assembled output
+│   └── hello.obj      # Object file
+├── Makefile           # Build configuration
+├── README.md          # This file
+├── LICENSE            # MIT License
+└── lc3-vm.md          # Technical documentation
 ```
 
-## 用法
+## Prerequisites
 
-编译：
+- GCC or Clang
+- Python 3.x (for the assembler)
+- Make
+
+## Building
+
+To build the VM:
+
 ```bash
 make
 ```
 
-运行：
+This will compile the VM and place the executable in `bin/lc3vm`.
+
+## Usage
+
+### Running Programs
+
+To run an LC-3 object file:
+
 ```bash
-./bin/lc3vm <program.obj>
+./bin/lc3vm test/hello.obj
 ```
 
-## 说明
-- 源码位于 `src/`，头文件建议放在 `include/`
-- 可执行文件输出到 `bin/`
-- 测试/样例文件在 `test/`
-- 汇编器脚本在 `assembler/`
-- 其他文档和说明见根目录
+### Assembling Programs
+
+First, assemble your LC-3 assembly file:
+
+```bash
+python3 assembler/assembler.py test/hello.asm
+```
+
+This will generate a `.obj` file that can be run with the VM.
+
+## Examples
+
+The `test/` directory contains example programs:
+
+- `hello.asm`: A simple "Hello, World!" program
+
+## Documentation
+
+For detailed information about the LC-3 architecture and instruction set, see [lc3-vm.md](lc3-vm.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
